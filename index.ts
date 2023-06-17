@@ -48,6 +48,8 @@ export const useEffect = (cb: (...args: any[]) => any, deps: any[]) => {
     }
 }
 
+const scars: Scar[] = [];
+
 export default class Scar {
     elem: Element = document.createElement("div");
     parent?: Element | Scar;
@@ -55,8 +57,10 @@ export default class Scar {
     #Comp?: (props: UpdateOptions, override: OverrideOptions) => Element | Scar;
     Comp?: Element | Scar;
     children: Scar[] = [];
+    options: ScarOptions;
 
     constructor(options: ScarOptions) {
+        this.options = options;
         if (typeof options.type === "function") {
             this.#Comp = options.type;
         } else {
@@ -66,6 +70,7 @@ export default class Scar {
 
         this.update(options);
         this.parent instanceof Element ? this.parent.appendChild(this.elem) : this.parent?.elem.appendChild(this.elem);
+        scars.push(this);
     }
 
     static fromElem(elem: Element) {;
@@ -143,6 +148,10 @@ export default class Scar {
     registerEventListener(e: keyof HTMLElementEventMap, cb: (ev: Event) => any) {
         this.elem.addEventListener(e, ev => {
             cb(ev);
+            // this.update(this.#options);
+            scars.forEach(scar => {
+                scar.update(scar.options);
+            });
         });
         return this;
     }
