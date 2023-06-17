@@ -34,7 +34,7 @@ export interface ScarOptions extends UpdateOptions {
     ];
 } */
 
-let effects: {
+/* let effects: {
     [effect: string]: any
 } = {};
 
@@ -46,7 +46,7 @@ export const useEffect = (cb: (...args: any[]) => any, deps: any[]) => {
         cb();
         effects[cb.toString()] = deps;
     }
-}
+} */
 
 const scars: Scar[] = [];
 
@@ -89,6 +89,8 @@ export default class Scar {
     }
 
     updateComp(options: UpdateOptions) {
+        this.elem.remove();
+
         const overrideText = () => this.#overrides.push("text");
         const overrideHtml = () => this.#overrides.push("html");
         const overrideChildren = () => this.#overrides.push("children");
@@ -109,6 +111,11 @@ export default class Scar {
             return;
         }
         this.elem = this.Comp.elem;
+        if (this.parent instanceof Element) {
+            this.parent.appendChild(this.elem);
+        } else {
+            this.parent?.elem.appendChild(this.elem);
+        }
         this.children = this.Comp.children;
     }
 

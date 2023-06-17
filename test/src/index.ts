@@ -1,4 +1,4 @@
-import Scar, { OverrideOptions, UpdateOptions, useEffect } from '../../index';
+import Scar, { OverrideOptions, UpdateOptions } from '../../index';
 
 const root = <HTMLDivElement>document.querySelector('#app');
 
@@ -25,20 +25,21 @@ const App = (_options: UpdateOptions, override: OverrideOptions) => {
         classes: ['count']
     });
 
-    useEffect(() => {
-        countElem.text = "test";
-        console.log(count)
-    }, [count]);
+    const incElem = new Scar({
+        type: "button",
+        text: "Increment",
+        classes: ['inc']
+    });
+
+    if (incElem != null) incElem.registerEventListener("click", () => {
+        count++;
+    });
 
     return new Scar({
         type: "div",
         children: [
             countElem,
-            new Scar({
-                type: "button",
-                text: "Increment",
-                classes: ['inc']
-            })
+            incElem
         ]
     });
 }
@@ -55,13 +56,7 @@ let btn: Scar | null = new Scar({
     text: "Increment"
 }); */
 
-const app = new Scar({
+new Scar({
     type: App,
     parent: root
-});
-
-const incElem = app.getChild('.inc');
-
-if (incElem != null) incElem.registerEventListener("click", () => {
-    count++;
 });
