@@ -1,0 +1,16 @@
+{
+  "name": "csbrowser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "cd ./test/; pnpm dev"
+  },
+  "keywords": [],
+  "author": "CrossScar",
+  "license": "Mozilla Public License 2",
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
+}

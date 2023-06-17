@@ -1,2 +1,0 @@
-# csb
-The CrossScar Browser
