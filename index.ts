@@ -21,7 +21,9 @@ export interface ScarOptions extends UpdateOptions {
     type: keyof HTMLElementTagNameMap | ((options: UpdateOptions, override: OverrideOptions) => Element | Scar)
 }
 
-/* export const useState = (fv: any) => {
+type StateOptions = ((() => any) | ((nv: any) => any))[];
+
+/* export const useState = (fv: any): StateOptions => {
     let v = fv;
 
     const state = () => v;
@@ -32,9 +34,9 @@ export interface ScarOptions extends UpdateOptions {
         state,
         setState
     ];
-} */
+}
 
-/* let effects: {
+let effects: {
     [effect: string]: any
 } = {};
 
