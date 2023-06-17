@@ -1,6 +1,6 @@
 import Scar, { OverrideOptions, UpdateOptions } from '../../index';
 
-const root = <HTMLDivElement>document.querySelector('#app');
+const root = document.body;
 
 let count = 0;
 
@@ -29,7 +29,8 @@ const App = (_options: UpdateOptions, override: OverrideOptions) => {
         children: [
             countElem,
             incElem
-        ]
+        ],
+        classes: ['App']
     });
 }
 
